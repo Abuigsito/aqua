@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Roboto">
+	<title>lolll</title>
+	<style type="text/css">
+		.header {
+  padding: 80px;
+  text-align: center;
+  background: #51932D;
+  color: white;
+}
+body { 
+	background-color: #F1FFF3; 
+}
+
+.header h1 {
+  font-size: 40px;
+}
+
+body {
+font-family: 'Roboto', serif;
+}
+
+.hardest h1 {
+	font-size: 5vw; text-align: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  position: relative;
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cerrar:hover {
+  color: red;
+}
+#buwutton {
+  background: #20A5D1;
+  color: white;
+  border: none;
+  display: block;
+  padding: 48px 72px;
+  margin: 20px auto;
+  font-size: 36px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+.translator-box {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+}
+.translator-box textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+	</style>
+
+
+</head>
+<body>
+<div class="header">
+	<h1>hii im abudigsisito!!!</h1>
+	<p>omg its me yay im rtrying to creayje a websiyet :D</p>
+</div>
+<div class="hardest">
+	<h1>HEYYY, DOU YUOU KNOW THAT MY HARDREST DEKMON IS.....</h1>
+</div>
+
+<button id="buwutton">clikc hereee</button>
+
+<div id="uwu" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar">&times;</span>
+    <h2>itssssss VERTIGOOOOOOOOOOO</h2>
+    <p>yaaaaaay :DDDDD</p>
+  <iframe 
+  width="560" 
+  height="315" 
+  src="https://www.youtube.com/embed/2tJ3hcd2Bf8?si=sz9no8YAuQOuX5kc" 
+  title="YouTube video player" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  referrerpolicy="strict-origin-when-cross-origin" 
+  allowfullscreen
+  ></iframe>
+  </div>
+</div>
+<div class="translator-box">
+  <h3>ultra mega translator</h3>
+  <textarea id="vietnamese-text" placeholder="LOLLLLL" rows="5"></textarea>
+  <button onclick="translateVietnameseToSpanish()">translate to a understable language,,,,</button>
+  <div class="translation-result">
+    <h4>the hyper result:</h4>
+    <div id="spanish-translation"></div>
+  </div>
+</div>
+<script>
+  const boton = document.getElementById("buwutton");
+  const modal = document.getElementById("uwu");
+  const cerrar = document.querySelector(".cerrar");
+  const iframe = document.querySelector('iframe');
+
+  boton.addEventListener("click", () => {
+    modal.style.display = "flex"; // lo que lo enseña
+  });
+
+  cerrar.addEventListener("click", () => {
+    modal.style.display = "none"; // ocukta la vaina
+    iframe.src = iframe.src;
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      iframe.src = iframe.src;
+    }
+  });
+function translateVietnameseToSpanish() {
+  const vietnameseText = document.getElementById('vietnamese-text').value;
+  const resultDiv = document.getElementById('spanish-translation');
+  
+  if(!vietnameseText) {
+    alert('check your text,,,,,,,');
+    return;
+  }
+
+  resultDiv.innerText = "wait a moent...";
+  
+  fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(vietnameseText)}&langpair=vi|es`)
+    .then(response => response.json())
+    .then(data => {
+      if(data.responseData && data.responseData.translatedText) {
+        resultDiv.innerText = data.responseData.translatedText;
+      } else {
+        resultDiv.innerText = "try again lol";
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      resultDiv.innerText = "server error. do not try again please leave what are you doing use google translate";
+    });
+}
+</script>
+</body>
+</html>
